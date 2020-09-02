@@ -63,14 +63,14 @@ export default {
         validate(){
             return this.link.length > 5 && this.link.match(linkRegex)
         },
-        copyShortUrl(event){
+        copyShortUrl(){
             if(! this.alowedToCopy) return;
 
-            // copyText(this.$refs.linkblock)
+            copyText(this.$refs.linkblock)
             
             navigator.clipboard.writeText(this.shortLink)
             
-            //saveLinkOnBackend(this.shortLink)
+            saveLinkOnBackend(this.shortLink)
             
             this.link = ''
         }
