@@ -6,7 +6,6 @@
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
 import UrlForm from './components/UrlForm.vue'
 
 export default {
