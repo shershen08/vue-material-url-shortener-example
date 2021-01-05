@@ -1,28 +1,27 @@
 <template>
     <section>
         <md-card>
-      <md-card-header>
-        <div class="md-title">Сокращаем ссылки</div>
-      </md-card-header>
-          <md-card-content>
-      <form class="md-layout">
-            <md-field>
-                <label>Длинная ссылка</label>
-                <md-input v-model="link" md-counter="30"></md-input>
-            </md-field>
-             <md-button @click="makeLinkShort()" class="md-raised  md-primary">сократить</md-button>
+            <md-card-header>
+                <div class="md-title">Shortening URLs</div>
+            </md-card-header>
+            <md-card-content>
+                <form class="md-layout">
+                    <md-field>
+                        <label>Long link</label>
+                        <md-input v-model="link" md-counter="30"></md-input>
+                    </md-field>
+                    <md-button @click="makeLinkShort()" class="md-raised  md-primary">make this link short</md-button>
 
-             <p v-if="link.length > 5 && !validate()">
-                <md-icon>error</md-icon> невалидный адрес 
-             </p>
+                    <p v-if="link.length > 5 && !validate()">
+                        <md-icon>error</md-icon> invalid URL
+                    </p>
 
-            <code>{{shortLink}}</code>
-            <input ref="linkblock" style="display: none !important;" v-model="shortLink"/>
-              <md-button v-on="event">Save & Copy 
-                  <md-icon>content_copy</md-icon>
-              </md-button>
-
-        </form>
+                    <code>{{shortLink}}</code>
+                    <input ref="linkblock" style="display: none !important;" v-model="shortLink"/>
+                    <md-button v-on="event">Save & Copy 
+                        <md-icon>content_copy</md-icon>
+                    </md-button>
+                </form>
           </md-card-content>
         </md-card>
     </section>
