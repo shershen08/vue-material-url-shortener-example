@@ -4,13 +4,13 @@
             <md-card-header>
                 <div class="md-title">Shortening URLs</div>
             </md-card-header>
-            <md-card-content>
+            <md-card-content> 
                 <form class="md-layout">
                     <md-field>
                         <label>Long link</label>
                         <md-input v-model="link" md-counter="30"></md-input>
                     </md-field>
-                    <md-button @click="makeLinkShort()" class="md-raised  md-primary">make this link short</md-button>
+                    <md-button @click="makeLinkShort()" data-testid="makeLinkShort" class="md-raised md-primary">make this link short</md-button>
 
                     <p v-if="link.length > 5 && !validate()">
                         <md-icon>error</md-icon> invalid URL
@@ -46,12 +46,12 @@ export default {
         }
     },
     mounted(){
-        navigator.permissions.query({name: "clipboard-write"}).then(result => {
-            if (result.state == "granted" || result.state == "prompt") {
-                //can write to the clipboard now 
-                this.alowedToCopy = true
-            }
-            });
+        navigator?.permissions?.query({name: "clipboard-write"}).then(result => {
+                if (result.state == "granted" || result.state == "prompt") {
+                    //can write to the clipboard now 
+                    this.alowedToCopy = true
+                }
+         });
     },
     methods: {
         makeLinkShort(){
@@ -60,7 +60,7 @@ export default {
             }
         },
         validate(){
-            return this.link.length > 5 && this.link.match(linkRegex)
+            return (this.link.length > 5 && this.link.match(linkRegex)) ? true : false
         },
         copyShortUrl(event){
             if(! this.alowedToCopy) return;
