@@ -31,10 +31,13 @@
 
 import {javaHashCode, linkRegex, saveLinkOnBackend, copyText} from '../utils'
 
-const HOST_URL = 'http://short.url/'
-
 export default {
     name: 'UrlForm',
+    props: {
+        hostUrl: {
+            type: String
+        }
+    },
     data(){
         return {
             link: '',
@@ -46,17 +49,20 @@ export default {
         }
     },
     mounted(){
-        navigator?.permissions?.query({name: "clipboard-write"}).then(result => {
-                if (result.state == "granted" || result.state == "prompt") {
-                    //can write to the clipboard now 
-                    this.alowedToCopy = true
-                }
-         });
+        this.checkPermissions();
     },
     methods: {
+        checkPermissions(){
+            navigator.permissions.query({name: "clipboard-write"}).then(result => {
+                    if (result.state == "granted" || result.state == "prompt") {
+                        //can write to the clipboard now 
+                        this.alowedToCopy = true
+                    }
+            });
+        },
         makeLinkShort(){
             if(this.validate()) {
-                this.shortLink = `${HOST_URL}${javaHashCode(this.link)}`
+                this.shortLink = `${this.hostUrl}${javaHashCode(this.link)}`
             }
         },
         validate(){

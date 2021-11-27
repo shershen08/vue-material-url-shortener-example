@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <UrlForm/>
+    <UrlForm :host-url="host"/>
   </div>
 </template>
 
@@ -12,7 +12,10 @@ export default {
   name: 'App',
   components: {
     UrlForm
-  }
+  },
+  data: () => ({
+    host: 'http://short.url/'
+  })
 }
 </script>
 
